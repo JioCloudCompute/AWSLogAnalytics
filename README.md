@@ -40,10 +40,10 @@ create AWS lambda function with following configuration:
     Memory: The memory limit, based on which the EC2 instance type to use is determined. For now, the default should do.
     Timeout: The default timeout value (3 seconds) is quite low for our use-case. 10 seconds might work better, but please adjust based on your testing.
  
- *for more info refer to "https://github.com/awslabs/amazon-elasticsearch-lambda-samples"
+ *for more info refer to https://github.com/awslabs/amazon-elasticsearch-lambda-samples
  
  Under events property of AWS S3 bucket containing logs, add this AWS lambda function to be called upon object creation.
  
  On AWS ES domain console, you shall find kibana endpoint. Clink on that link to query and visualize your indexed data.
 
-
+for more information refer to http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-aws-integrations.html#es-aws-integrations-s3-lambda-es
