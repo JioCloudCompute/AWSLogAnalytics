@@ -2,17 +2,17 @@
 
 This repository contains code for AWS lambda function 
 
-to stream data from AWS S3 
+- to stream data from AWS S3 
 
-and index in AWS ElasticSearch domain 
+- and index in AWS ElasticSearch domain 
 
-to be visualized using kibana endpoint provided by AWS.
+- to be visualized using kibana endpoint provided by AWS.
 
 
 It uses logagent-js to parse logs to desired key-value pairs to enable indexing in elastic search domain.
 
 
-Steps :
+##Steps :
 
 clone this repository to your local machine.
 
