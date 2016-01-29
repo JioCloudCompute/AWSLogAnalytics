@@ -12,7 +12,7 @@ This repository contains code for AWS lambda function
 It uses logagent-js to parse logs to desired key-value pairs to enable indexing in elastic search domain.
 
 
-##Steps :
+##Steps 
 
 - clone this repository to your local machine.
 
