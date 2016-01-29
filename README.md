@@ -14,9 +14,9 @@ It uses logagent-js to parse logs to desired key-value pairs to enable indexing 
 
 ##Steps :
 
--clone this repository to your local machine.
+- clone this repository to your local machine.
 
--Add or edit the following four global variables in s3_lambda_es.js file:
+- Add or edit the following four global variables in s3_lambda_es.js file:
 
     endpoint, the Amazon ES domain endpoint
 
@@ -36,13 +36,13 @@ It uses logagent-js to parse logs to desired key-value pairs to enable indexing 
                 doctype: 'apache'
             };
             
--copy the eslambda.zip file under eslambda directory to AWS bucket.
+- copy the eslambda.zip file under eslambda directory to AWS bucket.
 
--create AWS lambda function.
+- create AWS lambda function.
 
--copy the S3 url of eslambda.zip in AWS bucket to AWS lambda code.
+- copy the S3 url of eslambda.zip in AWS bucket to AWS lambda code.
 
--create AWS lambda function with following configuration:
+- create AWS lambda function with following configuration:
 
     Lambda Configuration:
 
@@ -52,8 +52,8 @@ It uses logagent-js to parse logs to desired key-value pairs to enable indexing 
  
  #####for more info refer to https://github.com/awslabs/amazon-elasticsearch-lambda-samples
  
- -Under events property of AWS S3 bucket containing logs, add this AWS lambda function to be called upon object creation.
+ - Under events property of AWS S3 bucket containing logs, add this AWS lambda function to be called upon object creation.
  
- -On AWS ES domain console, you shall find kibana endpoint. Clink on that link to query and visualize your indexed data.
+ - On AWS ES domain console, you shall find kibana endpoint. Clink on that link to query and visualize your indexed data.
 
 ####for more information refer to http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-aws-integrations.html#es-aws-integrations-s3-lambda-es
