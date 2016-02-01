@@ -25,9 +25,9 @@ var stream = require('stream');
 
 /* Globals */
 var esDomain = {
-    endpoint: 'https://search-compute-log-analyser-h4a2nxaj3ayh7nyizgijuii2uq.us-west-2.es.amazonaws.com/',
+    endpoint: 'https://search-staging-log-analyser-ip4reigso7ssobnm34txi4b6wm.us-west-2.es.amazonaws.com/',
     region: 'us-west-2',
-    index: 'non-analyzed',
+    index: 'nova-log-index',
     doctype: 'nova'
 };
 var endpoint =  new AWS.Endpoint(esDomain.endpoint);
