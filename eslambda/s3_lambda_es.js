@@ -60,7 +60,8 @@ function s3LogsToES(bucket, key, context, lineStream, recordStream) {
       .pipe(recordStream)
       .on('data', function(parsedEntry) {
           jsonParsedEntry = JSON.parse(parsedEntry);
-          jsonParsedEntry["S3Key"]=key;
+          raw_key = key.replace(/[-\/]/g,'_');
+          jsonParsedEntry["S3Key"]=raw_key;
           console.log("JSON Parsed Entry:", jsonParsedEntry);
           parsedEntry = JSON.stringify(jsonParsedEntry)
           console.log("Parsed Entry:", parsedEntry);
