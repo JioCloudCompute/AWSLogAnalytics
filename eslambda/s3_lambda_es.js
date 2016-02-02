@@ -27,7 +27,7 @@ var stream = require('stream');
 var esDomain = {
     endpoint: 'https://search-staging-log-analyser-ip4reigso7ssobnm34txi4b6wm.us-west-2.es.amazonaws.com/',
     region: 'us-west-2',
-    index: 'nova-log-index',
+    index: 'nova-log-index-with-key',
     doctype: 'nova'
 };
 var endpoint =  new AWS.Endpoint(esDomain.endpoint);
@@ -59,6 +59,11 @@ function s3LogsToES(bucket, key, context, lineStream, recordStream) {
       .pipe(lineStream)
       .pipe(recordStream)
       .on('data', function(parsedEntry) {
+          jsonParsedEntry = JSON.parse(parsedEntry);
+          jsonParsedEntry["S3Key"]=key;
+          console.log("JSON Parsed Entry:", jsonParsedEntry);
+          parsedEntry = JSON.stringify(jsonParsedEntry)
+          console.log("Parsed Entry:", parsedEntry);
           postDocumentToES(parsedEntry, context);
       });
 
