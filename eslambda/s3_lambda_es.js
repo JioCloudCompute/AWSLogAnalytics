@@ -63,7 +63,7 @@ function s3LogsToES(bucket, key, context, lineStream, recordStream) {
           raw_key = key.replace(/[-\/]/g,'_');
           jsonParsedEntry["S3Key"]=raw_key;
           esDomain.doctype = jsonParsedEntry["_type"];
-          console.log("JSON Parsed Entry:", jsonParsedEntry);
+          //console.log("JSON Parsed Entry:", jsonParsedEntry);
           parsedEntry = JSON.stringify(jsonParsedEntry)
           console.log("Parsed Entry:", parsedEntry);
           postDocumentToES(parsedEntry, context);
@@ -84,9 +84,10 @@ function s3LogsToES(bucket, key, context, lineStream, recordStream) {
  */
 function postDocumentToES(doc, context) {
     var req = new AWS.HttpRequest(endpoint);
-
+    console.log("posting document to ES ************")
     req.method = 'POST';
     req.path = path.join('/', esDomain.index, esDomain.doctype);
+    console.log("doctype : " + req.path)
     req.region = esDomain.region;
     req.body = doc;
     req.headers['presigned-expires'] = false;
@@ -95,11 +96,13 @@ function postDocumentToES(doc, context) {
     // Sign the request (Sigv4)
     var signer = new AWS.Signers.V4(req, 'es');
     signer.addAuthorization(creds, new Date());
-
+    console.log("------signed-------")
     // Post document to ES
     var send = new AWS.NodeHttpClient();
+    console.log("@send : " + send)
     send.handleRequest(req, null, function(httpResp) {
         var body = '';
+        console.log("-------handling request -------")
         httpResp.on('data', function (chunk) {
             body += chunk;
         });
