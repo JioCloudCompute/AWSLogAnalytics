@@ -25,9 +25,11 @@ var stream = require('stream');
 
 /* Globals */
 var esDomain = {
-    endpoint: 'https://search-staging-log-analyser-ip4reigso7ssobnm34txi4b6wm.us-west-2.es.amazonaws.com/',
+    endpoint: 'https://search-staging-log-analytics-jledw5gksxxtxpcunpfs3ui5k4.us-west-2.es.amazonaws.com/',
+    //endpoint: 'https://search-test-log-analyzer-jsvdkhdungxeywrigarrjmedii.us-west-2.es.amazonaws.com/',
+    //endpoint: 'https://search-compute-log-analyser-h4a2nxaj3ayh7nyizgijuii2uq.us-west-2.es.amazonaws.com/',
     region: 'us-west-2',
-    index: 'nova',
+    index: 'staging-logs',
     doctype: 'default'
 };
 var endpoint =  new AWS.Endpoint(esDomain.endpoint);
@@ -86,6 +88,9 @@ function postDocumentToES(doc, context) {
     var req = new AWS.HttpRequest(endpoint);
     console.log("posting document to ES ************")
     req.method = 'POST';
+    if(esDomain.doctype == null) {
+        esDomain.doctype = "default";
+    }
     req.path = path.join('/', esDomain.index, esDomain.doctype);
     console.log("doctype : " + req.path)
     req.region = esDomain.region;
@@ -108,7 +113,7 @@ function postDocumentToES(doc, context) {
         });
         httpResp.on('end', function (chunk) {
             numDocsAdded ++;
-            if (numDocsAdded === totLogLines) {
+            if (numDocsAdded == totLogLines) {
                 // Mark lambda success.  If not done so, it will be retried.
                 console.log('All ' + numDocsAdded + ' log records added to ES.');
                 context.succeed();
